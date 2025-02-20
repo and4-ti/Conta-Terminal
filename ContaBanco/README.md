@@ -1,6 +1,6 @@
 # ContaBanco - Conta Terminal
 
-➥ Este é um projeto em Java que simula a criação de uma conta bancária através da entrada de dados pelo usuário. O programa solicita algumas informações, realiza validações e imprime os detalhes da conta.
+➥ Este é um projeto em Java que simula características de uma conta em banco com dados de entrada inseridos pelo usuário. O programa solicita algumas informações, realiza validações e imprime os detalhes da conta.
 
 ---
 
