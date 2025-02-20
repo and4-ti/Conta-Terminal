@@ -36,17 +36,14 @@
 1. **Clone este repositório:**
     ```bash
     git clone https://github.com/and4-ti/Java-Projects.git
----
    
 2. **Acesse a pasta do projeto:**
     ```bash
     cd ContaBanco
----
 
 3. **Compile os arquivos Java:**
     ```bash
     javac -d bin src/*.java
----
 
 4. **Execute o programa:**
     ```bash
@@ -69,27 +66,20 @@ Agência: 1234
 Conta: 56789
 Seu saldo é de R$ 1.500,75 e já está disponível para saque.
 ```
-
+---
 ## ⚠️ **Tratamento de Erros**
 
 ➥ Se o usuário não inserir a agência ou o nome completo, o programa exibirá um erro e pedirá novamente.
 ➥ Se o usuário tentar inserir letras em campos numéricos (conta/saldo), o programa exibirá uma mensagem de erro e solicitará a entrada correta.
 
+---
+
 ## 🛠 **Autor**
 Anderson Oliveira
+
+---
 
 ## 📜 **Licença**
 
 Este projeto é de domínio público e pode ser utilizado livremente.
 
----
-```markdown
-Esse README segue **boas práticas**, incluindo:
-- **Explicação clara do projeto**
-- **Passo a passo para execução**
-- **Demonstração de entrada e saída**
-- **Tratamento de erros**
-- **Estrutura do projeto**
-
-Se precisar de ajustes ou quiser personalizar ainda mais, me avise! 🚀
-```
