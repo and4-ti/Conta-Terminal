@@ -1,5 +1,4 @@
 import java.text.NumberFormat;
-import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -10,72 +9,95 @@ public class ContaTerminal {
     private String nomeCliente = null;
     private double saldo = 0.00;
     
-
     public void criarConta(Scanner scanner) {
         
         while (true) {
-            System.out.println("Digite o número da agência: ");
-            String agencia = scanner.nextLine();
-            
-            // Verificar se o usuário avançou deixando o campo em branco
-            if (!agencia.isEmpty()) {
-                this.agencia = agencia;
-                break;
-            } else {
-                System.out.println("Este campo não pode ficar em branco.");
+            System.out.println("Digite o número da agência com o digito: ");
+            String entrada = scanner.nextLine();
+
+            try {
+                if (validarCampo(entrada)) {
+                    this.agencia = entrada;
+                    break;
+                } else {
+                    throw new QuantidadeDigitosException("Agência: Apenas números com no mínimo quatro digitos e sem separação.");
+                }
+            }
+            catch(QuantidadeDigitosException e) {
+                System.out.println(e.getMessage());
             }
         }
 
         while (true) {
-            System.out.println("Digite o número da conta: ");
-            try {
-                this.numero = scanner.nextInt();
-                scanner.nextLine();
-                break;
+            System.out.println("Digite o número da conta com o digito: ");
+            String conta = scanner.nextLine();
 
-            } catch(InputMismatchException e) {
-                System.out.println("Digite apenas números.");
-                scanner.nextLine();
+            try {
+                if (validarCampo(conta)) {
+                    this.numero = Integer.parseInt(conta);
+                    break;
+                } else {
+                    throw new QuantidadeDigitosException("Conta: Apenas números com no mínimo quatro digitos e sem separação.");
+                }
+            }
+            catch(QuantidadeDigitosException e) {
+                System.out.println(e.getMessage());
             }
         }
         
         while (true) {
             System.out.println("Digite seu nome completo: ");
-            String nomeCliente = scanner.nextLine();
+            String nome = scanner.nextLine();
             
-            // Verificar se o usuário avançou deixando o campo em branco
-            if (!nomeCliente.isEmpty()) {
-                this.nomeCliente = nomeCliente;
+            if (nome.matches("^[a-zA-Z\\u00C0-\\u00FF '-]{3,}$")) {
+                this.nomeCliente = nome;
                 break;
             } else {
-                System.out.println("Este campo não pode ficar em branco.");
-            }
+                System.out.println("Este campo não aceita números e deve conter no mínimo três caracteres.");
+            }            
         }
 
         while (true) {
             System.out.println("Informe o valor de saldo: ");
-            try {
-                this.saldo = scanner.nextDouble();
-                scanner.nextLine();
-                break;
+            String valor = scanner.nextLine();
 
-            } catch(InputMismatchException e) {
-                System.out.println("Esse campo aceita apenas números inteiros e decimais.");
-                System.out.println("Se continuar vendo essa mensagem, ao invés de ponto, digite vírgula para separar as casas decimais.");
-                scanner.nextLine();
+            try {
+                if (!valor.isEmpty()) {
+                    this.saldo = Double.parseDouble(valor);
+                    break;
+                } else {
+                    System.out.println("Por favor, digite um valor.");
+                }
+            }
+            catch(NumberFormatException e) {
+                System.out.println("Aceita apenas números inteiros ou decimais com separação por ponto.");
             }
         }
 
     }
 
     public void imprimirDadosConta() {
-        
-        NumberFormat moeda = NumberFormat.getCurrencyInstance(Locale.of("pt", "BR"));
-        
         System.out.println("Olá, " + this.nomeCliente + "! Obrigado por criar uma conta em nosso banco!");
-        System.out.println("Agência: " + this.agencia);
-        System.out.println("Conta: " + this.numero);
-        System.out.println("Seu saldo é de " + moeda.format(this.saldo) + " e já está disponível para saque.");
+        System.out.println("Agência: " + formatarAgencia(this.agencia));
+        System.out.println("Conta: " + formatarConta(this.numero));
+        System.out.println("Seu saldo é de " + formatarSaldo(this.saldo) + " e já está disponível para saque.");
     }
 
+    private String formatarAgencia(String entrada) {
+        int x = entrada.length() - 1;
+        return entrada.replaceAll("(\\d{" + x +"})(\\d)", "$1-$2");
+    }
+
+    private String formatarConta(int numero) {
+        return String.format("%d", numero).replaceAll("(\\d)(\\d{1})$","$1-$2");
+    }
+
+    private String formatarSaldo (double saldo) {
+        NumberFormat moedaLocal = NumberFormat.getCurrencyInstance(Locale.of("pt", "BR"));
+        return moedaLocal.format(saldo);
+    }
+
+    private boolean validarCampo(String quantidade) throws QuantidadeDigitosException {
+        return quantidade.matches("\\d{4,}");
+    }
 }
