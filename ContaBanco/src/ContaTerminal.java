@@ -84,12 +84,11 @@ public class ContaTerminal {
     }
 
     private String formatarAgencia(String entrada) {
-        int x = entrada.length() - 1;
-        return entrada.replaceAll("(\\d{" + x +"})(\\d)", "$1-$2");
+        return entrada.replaceAll("(\\d)(\\d)$", "$1-$2");
     }
 
     private String formatarConta(int numero) {
-        return String.format("%d", numero).replaceAll("(\\d)(\\d{1})$","$1-$2");
+        return String.format("%d", numero).replaceAll("(\\d)(\\d)$","$1-$2");
     }
 
     private String formatarSaldo (double saldo) {
