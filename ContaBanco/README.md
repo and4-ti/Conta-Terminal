@@ -104,11 +104,11 @@ Seu saldo é de R$ 1.500,75 e já está disponível para saque.
 ---
 
 ## 🛠 **Autor**
-Anderson Oliveira
+Este projeto foi desenvolvido por Anderson Oliveira para fins de aprendizado em Java e boas práticas de programação.
 
 ---
 
 ## 📜 **Licença**
 
-➥ Este projeto foi desenvolvido para fins de aprendizado em Java e boas práticas de programação. É um projeto de domínio público e pode ser utilizado livremente.
+➥ É um projeto de domínio público e pode ser utilizado livremente.
 
